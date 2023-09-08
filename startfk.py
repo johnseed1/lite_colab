@@ -423,8 +423,8 @@ def copy_loras():
       source = source_folder + file_name
       destination = destination_folder + file_name
       if os.path.isfile(source):
-        print("Copying " + file_name)
         shutil.copy(source, destination)
+    print("Loras copied")
 
 
 if __name__ == "__main__":
