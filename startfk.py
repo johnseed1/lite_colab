@@ -10,6 +10,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from packaging import version
+import shutil
 
 import logging
 logging.getLogger("xformers").addFilter(lambda record: 'A matching Triton is not available' not in record.getMessage())
@@ -262,6 +263,9 @@ def create_api(app):
 
 
 def wait_on_server(demo=None):
+    # print("copying files")
+    # !cp -r /content/drive/MyDrive/Lora/ /content/lite_colab/models/Lora/
+    copy_loras();
     while 1:
         time.sleep(0.5)
         if shared.state.need_restart:
@@ -299,7 +303,7 @@ def startfk():
         modules.script_callbacks.before_ui_callback()
         startup_timer.record("scripts before_ui_callback")
 
-        shared.demo = modules.ui.create_ui()
+        shared.demo = modules.ui.create_ui();shared.demo.queue(concurrency_count=999999,status_update_rate=0.1)
         startup_timer.record("create ui")
 
         if not cmd_opts.no_gradio_queue:
@@ -327,6 +331,9 @@ def startfk():
         )
         # after initial launch, disable --autolaunch for subsequent restarts
         cmd_opts.autolaunch = False
+
+        # print("copying files")
+        # !cp -r /content/drive/MyDrive/Lora/ /content/lite_colab/models/Lora/
 
         startup_timer.record("gradio launch")
 
@@ -396,6 +403,8 @@ def startfk():
         shared.reload_hypernetworks()
         startup_timer.record("reload hypernetworks")
 
+        copy_loras()
+
         ui_extra_networks.intialize()
         ui_extra_networks.register_page(ui_extra_networks_textual_inversion.ExtraNetworksPageTextualInversion())
         ui_extra_networks.register_page(ui_extra_networks_hypernets.ExtraNetworksPageHypernetworks())
@@ -404,6 +413,17 @@ def startfk():
         extra_networks.initialize()
         extra_networks.register_extra_network(extra_networks_hypernet.ExtraNetworkHypernet())
         startup_timer.record("initialize extra networks")
+
+def copy_loras():
+    source_folder = "/content/drive/MyDrive/Lora/"
+    destination_folder = "/content/lite_colab/models/Lora/"
+    
+    for file_name in os.listdir(source_folder):
+      source = source_folder + file_name
+      destination = destination_folder + file_name
+      if os.path.isfile(source):
+        print("Copying " + file_name)
+        shutil.copy(source, destination)
 
 
 if __name__ == "__main__":
