@@ -1,9 +1,9 @@
 {
-  "sd_models":  {
-    "PMA-Inpaint": "https://civitai.com/api/download/models/110119",
-    "PMA-Regular": "https://civitai.com/api/download/models/110085",
+  "sd_models": {
+    "PMA-inpaint": "https://civitai.com/api/download/models/110119",
+    "PMA Regular": "https://civitai.com/api/download/models/110085",
     "RLVZ-Regular": "https://civitai.com/api/download/models/130072",
-    "RLVZ-Inpaint": "https://civitai.com/api/download/models/130090",
-    "LLD-Regular": "https://civitai.com/api/download/models/136151",
-  },
+    "RLVZ-Inpaint": "https://civitai.com/api/download/models/130090"
+  }
 }
+
