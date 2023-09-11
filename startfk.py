@@ -433,7 +433,7 @@ def startfk():
 
 def get_models():
     print("Launching get_models now.")
-    mdls = pd.read_csv("lite_colab/models/mdls.csv")
+    mdls = pd.read_csv("models/mdls.csv")
     
     for count in range(0, len(mdls)):
       filepath, link = mdls.filepath[count], mdls.link[count]
