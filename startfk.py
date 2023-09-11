@@ -406,9 +406,9 @@ def startfk():
         shared.reload_hypernetworks()
         startup_timer.record("reload hypernetworks")
 
-        copy_loras()
-        get_models()
-        print("Hey, this ran!")
+        # copy_loras()
+        # get_models()
+        # print("Hey, this ran!")
 
         ui_extra_networks.intialize()
         ui_extra_networks.register_page(ui_extra_networks_textual_inversion.ExtraNetworksPageTextualInversion())
