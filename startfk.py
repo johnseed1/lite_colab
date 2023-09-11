@@ -418,17 +418,17 @@ def startfk():
         extra_networks.register_extra_network(extra_networks_hypernet.ExtraNetworkHypernet())
         startup_timer.record("initialize extra networks")
 
-def copy_loras():
-    Print("Launching copy_loras now.")
-    source_folder = "/content/drive/MyDrive/Lora/"
-    destination_folder = "/content/lite_colab/models/Lora/"
+# def copy_loras():
+#     Print("Launching copy_loras now.")
+#     source_folder = "/content/drive/MyDrive/Lora/"
+#     destination_folder = "/content/lite_colab/models/Lora/"
     
-    for file_name in os.listdir(source_folder):
-      source = source_folder + file_name
-      destination = destination_folder + file_name
-      if os.path.isfile(source):
-        shutil.copy(source, destination)
-    print("Loras copied")
+#     for file_name in os.listdir(source_folder):
+#       source = source_folder + file_name
+#       destination = destination_folder + file_name
+#       if os.path.isfile(source):
+#         shutil.copy(source, destination)
+#     print("Loras copied")
 
 def get_models():
     Print("Launching get_models now.")
