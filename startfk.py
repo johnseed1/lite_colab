@@ -267,7 +267,8 @@ def create_api(app):
 def wait_on_server(demo=None):
     # print("copying files")
     # !cp -r /content/drive/MyDrive/Lora/ /content/lite_colab/models/Lora/
-    copy_loras();
+    # copy_loras();
+    get_models();
     while 1:
         time.sleep(0.5)
         if shared.state.need_restart:
