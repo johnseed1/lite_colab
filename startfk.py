@@ -432,7 +432,7 @@ def startfk():
 #     print("Loras copied")
 
 def get_models():
-    Print("Launching get_models now.")
+    print("Launching get_models now.")
     mdls = pd.read_csv("lite_colab/models/mdls.csv")
     
     for count in range(0, len(mdls)):
