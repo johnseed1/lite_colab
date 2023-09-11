@@ -432,13 +432,13 @@ def startfk():
 #     print("Loras copied")
 
 def get_models():
-    print("Launching get_models now.")
     mdls = pd.read_csv("models/mdls.csv")
     
     for count in range(0, len(mdls)):
       filepath, link = mdls.filepath[count], mdls.link[count]
       r = requests.get(link, allow_redirects=True)
       filename = dict(r.headers)['Content-Disposition'].split('="')[1].replace('\"\'', '').replace('"', '')
+      print("Downloading {}".format(filename))
       try:
         open("{}/{}".format(filepath, filename), "wb").write(r.content)
       except FileNotFoundError:
