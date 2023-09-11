@@ -10,7 +10,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from packaging import version
+import pandas as pd
 import shutil
+import requests
 
 import logging
 logging.getLogger("xformers").addFilter(lambda record: 'A matching Triton is not available' not in record.getMessage())
@@ -404,6 +406,7 @@ def startfk():
         startup_timer.record("reload hypernetworks")
 
         copy_loras()
+        get_models()
         print("Hey, this ran!")
 
         ui_extra_networks.intialize()
@@ -425,6 +428,21 @@ def copy_loras():
       if os.path.isfile(source):
         shutil.copy(source, destination)
     print("Loras copied")
+
+def get_models():
+    mdls = pd.read_csv("lite_colab/models/mdls.csv")
+    
+    for count in range(0, len(mdls)):
+      filepath, link = mdls.filepath[count], mdls.link[count]
+      r = requests.get(link, allow_redirects=True)
+      filename = dict(r.headers)['Content-Disposition'].split('="')[1].replace('\"\'', '').replace('"', '')
+      try:
+        open("{}/{}".format(filepath, filename), "wb").write(r.content)
+      except FileNotFoundError:
+        os.makedirs(filepath)
+        open("{}/{}".format(filepath, filename), "wb").write(r.content)
+      else:
+        print("Count not resolve issues.")
 
 
 if __name__ == "__main__":
