@@ -419,6 +419,7 @@ def startfk():
         startup_timer.record("initialize extra networks")
 
 def copy_loras():
+    Print("Launching copy_loras now.")
     source_folder = "/content/drive/MyDrive/Lora/"
     destination_folder = "/content/lite_colab/models/Lora/"
     
@@ -430,6 +431,7 @@ def copy_loras():
     print("Loras copied")
 
 def get_models():
+    Print("Launching get_models now.")
     mdls = pd.read_csv("lite_colab/models/mdls.csv")
     
     for count in range(0, len(mdls)):
