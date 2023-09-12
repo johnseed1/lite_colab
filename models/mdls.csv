@@ -16,4 +16,3 @@ lora,models//Lora,https://civitai.com/api/download/models/97013
 lora,models//Lora,https://civitai.com/api/download/models/97359
 lora,models//Lora,https://civitai.com/api/download/models/7870?type=Model&format=SafeTensor&size=full&fp=fp16
 lora,models//Lora,https://civitai.com/api/download/models/10187?type=Model&format=SafeTensor&size=full&fp=fp16
-stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/105739?type=Model&format=SafeTensor&size=pruned&fp=fp32
