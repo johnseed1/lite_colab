@@ -1,7 +1,8 @@
 mdl_type,filepath,link
+stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/130072
+stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/125437
 lora,models//Lora,https://civitai.com/api/download/models/63698
 lora,models//Lora,https://civitai.com/api/download/models/98386
-stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/130072
 embedding,models//embeddings,https://civitai.com/api/download/models/42247
 lora,models//Lora,https://civitai.com/api/download/models/72499
 lora,models//Lora,https://civitai.com/api/download/models/133002
@@ -16,7 +17,6 @@ lora,models//Lora,https://civitai.com/api/download/models/97013
 lora,models//Lora,https://civitai.com/api/download/models/97359
 lora,models//Lora,https://civitai.com/api/download/models/7870?type=Model&format=SafeTensor&size=full&fp=fp16
 lora,models//Lora,https://civitai.com/api/download/models/10187?type=Model&format=SafeTensor&size=full&fp=fp16
-stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/125437
 lora,models//Lora,https://civitai.com/api/download/models/115717?type=Model&format=SafeTensor
 lora,models//Lora,https://civitai.com/api/download/models/71812
 lora,models//Lora,https://civitai.com/api/download/models/31602
