@@ -13,6 +13,7 @@ from packaging import version
 import pandas as pd
 import shutil
 import requests
+from tqdm import tqdm
 
 import logging
 logging.getLogger("xformers").addFilter(lambda record: 'A matching Triton is not available' not in record.getMessage())
@@ -431,21 +432,61 @@ def startfk():
 #         shutil.copy(source, destination)
 #     print("Loras copied")
 
-def get_models():
-    mdls = pd.read_csv("models/mdls.csv")
+# def get_models():
+#     mdls = pd.read_csv("models/mdls.csv")
     
-    for count in range(0, len(mdls)):
-      filepath, link = mdls.filepath[count], mdls.link[count]
-      r = requests.get(link, allow_redirects=True)
-      filename = dict(r.headers)['Content-Disposition'].split('="')[1].replace('\"\'', '').replace('"', '')
-      print("Downloading {}".format(filename))
-      try:
-        open("{}/{}".format(filepath, filename), "wb").write(r.content)
-      except FileNotFoundError:
-        os.makedirs(filepath)
-        open("{}/{}".format(filepath, filename), "wb").write(r.content)
-      else:
-        print("Count not resolve issues.")
+#     for count in range(0, len(mdls)):
+#       filepath, link = mdls.filepath[count], mdls.link[count]
+#       r = requests.get(link, allow_redirects=True)
+#       filename = dict(r.headers)['Content-Disposition'].split('="')[1].replace('\"\'', '').replace('"', '')
+#       print("Downloading {}".format(filename))
+#       try:
+#         open("{}/{}".format(filepath, filename), "wb").write(r.content)
+#       except FileNotFoundError:
+#         os.makedirs(filepath)
+#         open("{}/{}".format(filepath, filename), "wb").write(r.content)
+#       else:
+#         print("Count not resolve issues.")
+
+    def download_file(url, filepath):
+        response = requests.get(url, stream=True)
+        total_size = int(response.headers.get('content-length', 0))
+        
+        with open(filepath, 'wb') as file, tqdm(
+            desc=os.path.basename(filepath),
+            total=total_size,
+            unit='B',
+            unit_scale=True,
+            unit_divisor=1024,
+        ) as bar:
+            for data in response.iter_content(chunk_size=1024):
+                file.write(data)
+                bar.update(len(data))
+    
+    def get_models():
+        print("Launching get_models now.")
+        mdls = pd.read_csv("models/mdls.csv")
+    
+        for filepath, link in zip(mdls.filepath, mdls.link):
+            # Extract the filename from the Content-Disposition header
+            request = requests.get(link, allow_redirects=True)
+            filename = request.headers.get("Content-Disposition").split('="')[1].replace('\"\'', '').replace('"', '')
+    
+            # Check if the file already exists in the specified directory
+            full_path = os.path.join(filepath, filename)
+            if not os.path.exists(full_path):
+                # If the directory doesn't exist, create it
+                try:
+                  os.makedirs(filepath)
+                except FileExistsError:
+                  pass
+                else:
+                  pass
+                
+                # Download and save the file with a progress bar
+                download_file(link, full_path)
+            else:
+                print(f"File '{filename}' already exists in '{filepath}'")
 
 
 if __name__ == "__main__":
