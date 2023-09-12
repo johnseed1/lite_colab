@@ -420,41 +420,41 @@ def startfk():
         extra_networks.register_extra_network(extra_networks_hypernet.ExtraNetworkHypernet())
         startup_timer.record("initialize extra networks")
 
-    def download_file(url, filepath):
-        response = requests.get(url, stream=True)
-        total_size = int(response.headers.get('content-length', 0))
+def download_file(url, filepath):
+    response = requests.get(url, stream=True)
+    total_size = int(response.headers.get('content-length', 0))
 
-        with open(filepath, 'wb') as file, tqdm(
-            desc=os.path.basename(filepath),
-            total=total_size,
-            unit='B',
-            unit_scale=True,
-            unit_divisor=1024
-        ) as bar:
-            for data in response.iter_content(chunk_size=1024):
-                file.write(data)
-                bar.update(len(data))
-    
-    def get_models():
-        mdls=pd.read_csv("models/mdls.csv")
+    with open(filepath, 'wb') as file, tqdm(
+        desc=os.path.basename(filepath),
+        total=total_size,
+        unit='B',
+        unit_scale=True,
+        unit_divisor=1024
+    ) as bar:
+        for data in response.iter_content(chunk_size=1024):
+            file.write(data)
+            bar.update(len(data))
 
-        for filepath, link in zip(mdls.filepath, mdls.link):
-            # Extract the filename from the Content-Disposition header
-            request = requests.get(link, allow_redirects=True)
-            filename = request.headers.get("Content-Disposition").split('="')[1].replace('\"\'', '').replace('"', '')
+def get_models():
+    mdls=pd.read_csv("models/mdls.csv")
 
-            # Check if the file already exists in the specified directory
-            full_path = os.path.join(filepath, filename)
-            if not os.path.exists(full_path):
-                try:
-                    os.makedirs(filepath)
-                except FileExistsError:
-                    pass
-                else:
-                    pass
-                download_file(link, full_path)
+    for filepath, link in zip(mdls.filepath, mdls.link):
+        # Extract the filename from the Content-Disposition header
+        request = requests.get(link, allow_redirects=True)
+        filename = request.headers.get("Content-Disposition").split('="')[1].replace('\"\'', '').replace('"', '')
+
+        # Check if the file already exists in the specified directory
+        full_path = os.path.join(filepath, filename)
+        if not os.path.exists(full_path):
+            try:
+                os.makedirs(filepath)
+            except FileExistsError:
+                pass
             else:
-                print(f"File '{filename}' already exists in '{filepath}'")   
+                pass
+            download_file(link, full_path)
+        else:
+            print(f"File '{filename}' already exists in '{filepath}'")   
 
 
 # def copy_loras():
