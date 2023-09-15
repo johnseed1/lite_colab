@@ -3,7 +3,7 @@ stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/model
 stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/125437
 lora,models//Lora,https://civitai.com/api/download/models/63698
 lora,models//Lora,https://civitai.com/api/download/models/98386
-embedding,models//embeddings,https://civitai.com/api/download/models/42247
+embedding,..//embeddings,https://civitai.com/api/download/models/42247
 lora,models//Lora,https://civitai.com/api/download/models/72499
 lora,models//Lora,https://civitai.com/api/download/models/133002
 lora,models//Lora,https://civitai.com/api/download/models/47281?type=Model&format=SafeTensor
@@ -22,3 +22,5 @@ lora,models//Lora,https://civitai.com/api/download/models/71812
 lora,models//Lora,https://civitai.com/api/download/models/31602
 lora,models//Lora,https://civitai.com/api/download/models/158798?type=Model&format=SafeTensor
 lora,models//Lora,https://civitai.com/api/download/models/62833
+lora,models//Lora,https://civitai.com/api/download/models/110217?type=Model&format=SafeTensor
+embedding,..//embeddings,https://civitai.com/api/download/models/9208?type=Model&format=SafeTensor&size=full&fp=fp16
