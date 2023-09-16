@@ -1,6 +1,5 @@
 mdl_type,filepath,link
 stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/130072
-stable_diffusion,models//Stable-diffusion,https://civitai.com/api/download/models/125437
 lora,models//Lora,https://civitai.com/api/download/models/63698
 lora,models//Lora,https://civitai.com/api/download/models/98386
 embedding,..//embeddings,https://civitai.com/api/download/models/42247
