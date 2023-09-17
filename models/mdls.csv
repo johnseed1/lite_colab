@@ -24,3 +24,4 @@ lora,models//Lora,https://civitai.com/api/download/models/158798?type=Model&form
 lora,models//Lora,https://civitai.com/api/download/models/62833
 lora,models//Lora,https://civitai.com/api/download/models/110217?type=Model&format=SafeTensor
 embedding,..//lite_colab//embeddings,https://civitai.com/api/download/models/9208?type=Model&format=SafeTensor&size=full&fp=fp16
+lora,models//Lora,https://civitai.com/api/download/models/123570
