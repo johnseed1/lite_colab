@@ -444,9 +444,9 @@ def get_models():
         try:
             filename = request.headers.get("Content-Disposition").split('="')[1].replace('\"\'', '').replace('"', '')
         except AttributeError:
-            filename = link.split("/")[len(link.split("/"))]
+            filename = link.split("/")[len(link.split("/"))-1]
         except
-            filename = link.split("/")[len(link.split("/"))]
+            filename = link.split("/")[len(link.split("/"))-1]
         else:
             pass
 
