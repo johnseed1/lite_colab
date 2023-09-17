@@ -441,7 +441,14 @@ def get_models():
     for filepath, link in zip(mdls.filepath, mdls.link):
         # Extract the filename from the Content-Disposition header
         request = requests.get(link, allow_redirects=True)
-        filename = request.headers.get("Content-Disposition").split('="')[1].replace('\"\'', '').replace('"', '')
+        try:
+            filename = request.headers.get("Content-Disposition").split('="')[1].replace('\"\'', '').replace('"', '')
+        except AttributeError:
+            filename = link.split("/")[len(link.split("/"))]
+        except
+            filename = link.split("/")[len(link.split("/"))]
+        else:
+            pass
 
         # Check if the file already exists in the specified directory
         full_path = os.path.join(filepath, filename)
